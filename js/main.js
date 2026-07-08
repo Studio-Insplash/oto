@@ -10,4 +10,4 @@ function switchSection(target) {
     }
 }
 
-switchSection("playing")
+switchSection("import")
