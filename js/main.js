@@ -1,11 +1,18 @@
-const input = document.querySelector('input');
+const input = document.querySelector('.dragAndDrop');
 
-input.addEventListener('change', (e) => {
-    const files = e.target.files;
+input.addEventListener('dragover', (e) => {
+    e.preventDefault();
+})
+
+input.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const files = e.dataTransfer.files;
     // TODO: files -> Array -> In loop, retrieve File and temp url from URL.createObjectURL()
     console.log(files)
     console.log(files[0])
 })
+
+
 
 function switchSection(target) {
     const allSection = document.querySelectorAll("section")
