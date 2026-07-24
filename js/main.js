@@ -1,12 +1,7 @@
-const input = document.querySelector('.dragAndDrop');
+const input = document.getElementById("fileInput");
 
-input.addEventListener('dragover', (e) => {
-    e.preventDefault();
-})
-
-input.addEventListener('drop', (e) => {
-    e.preventDefault();
-    const files = e.dataTransfer.files;
+fileInput.addEventListener('change', (e) => {
+    const files = e.target.files;
     // TODO: files -> Array -> In loop, retrieve File and temp url from URL.createObjectURL()
     console.log(files)
     console.log(files[0])
