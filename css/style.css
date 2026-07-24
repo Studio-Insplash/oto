@@ -5,7 +5,10 @@
 }
 
 :root {
-    --bg-color: #000000;
+    --bg-color: #1a1714;
+    --outline-border-color: #a94d00;
+    --inner-border-color: #949593;
+    --inner-bg-color: #000000;
 }
 
 html,
@@ -22,4 +25,35 @@ body {
 
 body {
     background-color: var(--bg-color);
+}
+
+#import {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.drop-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    padding: 5.5rem;
+    outline: 1px solid var(--outline-border-color);
+    outline-offset: 3px;
+    border: 5px solid var(--inner-border-color);
+    background-color: var(--inner-bg-color);
+}
+
+#fileInput {
+    text-align: center;
+}
+
+#fileInput::file-selector-button {
+    height: 35px;
+    width: 250px;
 }
