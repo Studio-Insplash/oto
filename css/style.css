@@ -9,6 +9,9 @@
     --outline-border-color: #a94d00;
     --inner-border-color: #949593;
     --inner-bg-color: #000000;
+    --button-bg-color: #1a1714;
+    --button-border-color: #ff7f00;
+    --button-txt-color: #ffffff;
 }
 
 html,
@@ -44,7 +47,7 @@ body {
     border-radius: 50%;
     padding: 5.5rem;
     outline: 1px solid var(--outline-border-color);
-    outline-offset: 3px;
+    outline-offset: 7px;
     border: 5px solid var(--inner-border-color);
     background-color: var(--inner-bg-color);
 }
@@ -53,7 +56,21 @@ body {
     text-align: center;
 }
 
-#fileInput::file-selector-button {
-    height: 35px;
-    width: 250px;
+.upload-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--button-bg-color);
+    border: 2px solid var(--button-border-color);
+    box-shadow: 
+        0 5px 10px rgba(0,0,0,0.5);
+    color: var(--button-txt-color);
+    border-radius: 50%;
+    height: 110px;
+    width: 110px;
+}
+
+.upload-btn:active {
+    transform: scale(0.92);
+    opacity: 0.8;
 }
