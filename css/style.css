@@ -13,6 +13,7 @@
     --button-border-color: #ff7f00;
     --button-svg-color: #ffffff;
     --button-outer-border-color: #e7dcdc;
+    --status-text-color: #e8e4de;
 }
 
 html,
@@ -33,10 +34,12 @@ body {
 
 #import {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
     width: 100%;
+    gap: 50px;
 }
 
 .drop-area {
@@ -101,12 +104,19 @@ body {
 
     border: 2px solid transparent;
     border-color: transparent var(--button-outer-border-color) transparent var(--button-outer-border-color);
+    /* border-color: #00c853; TODO: READY statusのときこのカラーコード使う。*/
     animation: rotate-loading 8s linear infinite;
 }
 
 .upload-btn:active {
     transform: scale(0.92);
     opacity: 0.8;
+}
+
+#status-text {
+    font-size: 25px;
+    letter-spacing: 0.5rem;
+    color: var(--status-text-color);
 }
 
 @keyframes rotate-loading {
