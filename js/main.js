@@ -1,10 +1,10 @@
 const input = document.getElementById("fileInput");
-// ここで現在の状態を記録する変数を用意。upload, generate, ready
 const curState = {
     status: "UPLOAD"
 };
 
 var files;
+var playlist = {};
 
 fileInput.addEventListener('change', (e) => {
     // UPLOADの文字をGENERATING PLAYLISTに変える。
@@ -15,13 +15,19 @@ fileInput.addEventListener('change', (e) => {
     const importSection = document.getElementById("import");
     importSection.classList.add("generating");
     files = e.target.files;
+    playListConverter(files);
+    // 変換器でプレイリストが完了次第、
+    // gerateの状態をreadyに変更する。
+    // GENRATING PLAYLISTの文字をREADY TO PLAYに変える。
 })
 
 /* プレイリスト変換器 */
-
-// 変換器でプレイリストが完了次第、
-// gerateの状態をreadyに変更する。
-// GENRATING PLAYLISTの文字をREADY TO PLAYに変える。
+function playListConverter(files) {
+    // filesからfileオブジェクトを取り出す
+    // nameをファイル名の拡張子を除いた部分から取り出す
+    // fileオブジェクトとnameを曲オブジェクトに追加。
+    // 曲オブジェクトをplaylist = {}に追加
+}
 
 
 /* 現在これは手動でセクションのスイッチを担当してるが、理想は、
