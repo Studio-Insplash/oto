@@ -19,6 +19,10 @@ fileInput.addEventListener('change', (e) => {
     // 変換器でプレイリストが完了次第、
     // gerateの状態をreadyに変更する。
     // GENRATING PLAYLISTの文字をREADY TO PLAYに変える。
+    statusText.textContent = "READY TO PLAY";
+    curState.status = "READY";
+    importSection.classList.remove("generating");
+    importSection.classList.add("ready");
 })
 
 /* プレイリスト変換器 */
