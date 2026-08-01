@@ -15,7 +15,6 @@ fileInput.addEventListener('change', (e) => {
     importSection.classList.add("generating");
     files = e.target.files;
     playListConverter(files);
-    console.log(playlist); // debug
     // READY TO PLAY SECTION
     statusText.textContent = "READY TO PLAY";
     curState.status = "READY";
