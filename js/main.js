@@ -4,21 +4,19 @@ const curState = {
 };
 
 var files;
-var playlist = {};
+var playlist = [];
 
 fileInput.addEventListener('change', (e) => {
-    // UPLOADの文字をGENERATING PLAYLISTに変える。
+    // GENERATING SECTION
     const statusText = document.getElementById("status-text");
     statusText.textContent = "GENERATING PLAYLIST";
-    // sectionにクラスgenerateを追加する。
     curState.status = "GENERATING";
     const importSection = document.getElementById("import");
     importSection.classList.add("generating");
     files = e.target.files;
     playListConverter(files);
-    // 変換器でプレイリストが完了次第、
-    // gerateの状態をreadyに変更する。
-    // GENRATING PLAYLISTの文字をREADY TO PLAYに変える。
+    console.log(playlist); // debug
+    // READY TO PLAY SECTION
     statusText.textContent = "READY TO PLAY";
     curState.status = "READY";
     importSection.classList.remove("generating");
@@ -27,10 +25,15 @@ fileInput.addEventListener('change', (e) => {
 
 /* プレイリスト変換器 */
 function playListConverter(files) {
-    // filesからfileオブジェクトを取り出す
-    // nameをファイル名の拡張子を除いた部分から取り出す
-    // fileオブジェクトとnameを曲オブジェクトに追加。
-    // 曲オブジェクトをplaylist = {}に追加
+    for (const file of files) {
+        const playbackURL = URL.createObjectURL(file);
+        const extensionIndex = file.name.lastIndexOf(".");
+        const songTitle = file.name.slice(0, extensionIndex);
+        playlist.push({
+            title: songTitle,
+            url: playbackURL
+        });
+    }
 }
 
 
