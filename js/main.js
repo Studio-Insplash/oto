@@ -1,26 +1,42 @@
+const MINIMUM_GENERATING_TIME = 5000;
+
 const input = document.getElementById("fileInput");
 const curState = {
     status: "UPLOAD"
 };
+const statusText = document.getElementById("status-text");
+const importSection = document.getElementById("import");
 
-var files;
-var playlist = [];
+let start;
+let end;
+let files;
+let playlist = [];
 
 fileInput.addEventListener('change', (e) => {
     // GENERATING SECTION
-    const statusText = document.getElementById("status-text");
     statusText.textContent = "GENERATING PLAYLIST";
     curState.status = "GENERATING";
-    const importSection = document.getElementById("import");
     importSection.classList.add("generating");
     files = e.target.files;
+    start = performance.now();
     playListConverter(files);
-    // READY TO PLAY SECTION
+    end = performance.now();
+    transitionToReady();
+})
+
+// READY TO PLAY SECTION
+async function transitionToReady() {
+    const minimumWaitTime = MINIMUM_GENERATING_TIME - (end - start);
+    if (minimumWaitTime > 0) {
+        await new Promise(resolve => {
+            setTimeout(resolve, minimumWaitTime);
+        })
+    }
     statusText.textContent = "READY TO PLAY";
     curState.status = "READY";
     importSection.classList.remove("generating");
     importSection.classList.add("ready");
-})
+}
 
 /* プレイリスト変換器 */
 function playListConverter(files) {
