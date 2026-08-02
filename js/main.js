@@ -1,4 +1,4 @@
-const MINIMUM_GENERATING_TIME = 5000;
+const MINIMUM_GENERATING_TIME = 10000;
 
 const input = document.getElementById("fileInput");
 const curState = {
@@ -14,7 +14,7 @@ let playlist = [];
 
 fileInput.addEventListener('change', (e) => {
     // GENERATING SECTION
-    statusText.textContent = "GENERATING PLAYLIST";
+    setAnimatedText("GENERATING PLAYLIST")
     curState.status = "GENERATING";
     importSection.classList.add("generating");
     files = e.target.files;
@@ -23,6 +23,25 @@ fileInput.addEventListener('change', (e) => {
     end = performance.now();
     transitionToReady();
 })
+
+// SPLIT GENERATING PLAYLIST
+function setAnimatedText(text) {
+    statusText.innerHTML = "";
+
+    let index = 0;
+
+    for (const char of text) {
+        const span = document.createElement("span");
+        if (char === " ") {
+            span.innerHTML = "&nbsp";
+        } else {
+            span.textContent = char;
+        }
+        span.style.animationDelay = `${index * 0.1}s`;
+        statusText.appendChild(span);
+        index++;
+    }
+}
 
 // READY TO PLAY SECTION
 async function transitionToReady() {
