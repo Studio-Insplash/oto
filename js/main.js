@@ -1,4 +1,4 @@
-const MINIMUM_GENERATING_TIME = 10000;
+const MINIMUM_GENERATING_TIME = 5000;
 
 const input = document.getElementById("fileInput");
 const curState = {
@@ -14,7 +14,6 @@ let playlist = [];
 
 fileInput.addEventListener('change', (e) => {
     // GENERATING SECTION
-    setAnimatedText("GENERATING PLAYLIST")
     curState.status = "GENERATING";
     importSection.classList.add("generating");
     files = e.target.files;
@@ -24,25 +23,6 @@ fileInput.addEventListener('change', (e) => {
     transitionToReady();
 })
 
-// SPLIT GENERATING PLAYLIST
-function setAnimatedText(text) {
-    statusText.innerHTML = "";
-
-    let index = 0;
-
-    for (const char of text) {
-        const span = document.createElement("span");
-        if (char === " ") {
-            span.innerHTML = "&nbsp";
-        } else {
-            span.textContent = char;
-        }
-        span.style.animationDelay = `${index * 0.1}s`;
-        statusText.appendChild(span);
-        index++;
-    }
-}
-
 // READY TO PLAY SECTION
 async function transitionToReady() {
     const minimumWaitTime = MINIMUM_GENERATING_TIME - (end - start);
@@ -51,7 +31,6 @@ async function transitionToReady() {
             setTimeout(resolve, minimumWaitTime);
         })
     }
-    statusText.textContent = "";
     curState.status = "READY";
     importSection.classList.remove("generating");
     importSection.classList.add("ready");
@@ -69,7 +48,6 @@ function playListConverter(files) {
         });
     }
 }
-
 
 /* 現在これは手動でセクションのスイッチを担当してるが、理想は、
    現在のstateがreadyになったら自動的にimportセクションからplayingセクションに変える。
