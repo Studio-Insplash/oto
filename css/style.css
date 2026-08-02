@@ -42,6 +42,30 @@ body {
     gap: 50px;
 }
 
+/* IDLE STATE */
+#import .bi-rocket-fill,
+#import .bi-check-lg {
+    display: none;
+}
+
+/* GENERATING STATE */
+#import.generating .bi-upload,
+#import.generating .bi-check-lg {
+    display: none;
+}
+#import.generating .bi-rocket-fill {
+    display: block;
+}
+
+/* READY STATE */
+#import.ready .bi-upload,
+#import.ready .bi-rocket-fill {
+    display: none;
+}
+#import.ready .bi-check-lg {
+    display: block;
+}
+
 .drop-area {
     display: flex;
     align-items: center;
@@ -94,6 +118,7 @@ body {
 
     animation: floating 2s ease-in-out infinite;
 }
+
 .upload-btn::before {
     content: "";
     position: absolute;

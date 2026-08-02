@@ -32,7 +32,7 @@ async function transitionToReady() {
             setTimeout(resolve, minimumWaitTime);
         })
     }
-    statusText.textContent = "READY TO PLAY";
+    statusText.textContent = "";
     curState.status = "READY";
     importSection.classList.remove("generating");
     importSection.classList.add("ready");
