@@ -11,7 +11,9 @@
     --inner-bg-color: #000000;
     --button-bg-color: #1a1714;
     --button-border-color: #ff7f00;
-    --button-svg-color: #ffffff;
+    --button-basic-svg-color: #ffffff;
+    --button-rocket-svg-color: #9556fa;
+    --button-check-svg-color: #00c853;
     --button-outer-border-color: #e7dcdc;
     --status-text-color: #e8e4de;
 }
@@ -55,6 +57,7 @@ body {
 }
 #import.generating .bi-rocket-fill {
     display: block;
+    color: var(--button-rocket-svg-color);
 }
 
 /* READY STATE */
@@ -64,6 +67,7 @@ body {
 }
 #import.ready .bi-check-lg {
     display: block;
+    color: var(--button-check-svg-color);
 }
 
 .drop-area {
@@ -111,7 +115,7 @@ body {
         -6px 0px 6px 0px rgba(87, 34, 34, 0.45),
         0px 6px 6px 0px rgba(87, 34, 34, 0.45),
         0px -6px 6px 0px rgba(87, 34, 34, 0.45);
-    color: var(--button-svg-color);
+    color: var(--button-basic-svg-color);
     border-radius: 50%;
     height: 100px;
     width: 100px;
@@ -144,6 +148,11 @@ body {
     color: var(--status-text-color);
 }
 
+#status-text span {
+    display: inline-block;
+    animation: blink 3.5s infinite;
+}
+
 @keyframes rotate-loading {
     from {
         transform: rotate(0deg);
@@ -158,4 +167,14 @@ body {
     0%   { transform: translateY(0); }
     50%  { transform: translateY(-3px); }
     100% { transform: translateY(0); }
+}
+
+@keyframes blink {
+    45% {
+        opacity: 1;
+    }
+
+    0%, 50%, 100% {
+        opacity: 0;
+    }
 }
