@@ -39,6 +39,9 @@ async function transitionToReady() {
 /* プレイリスト変換器 */
 function playListConverter(files) {
     for (const file of files) {
+        if (file.type !== "audio/mpeg" && file.type !== "audio/wav") {
+            continue;
+        }
         const playbackURL = URL.createObjectURL(file);
         const extensionIndex = file.name.lastIndexOf(".");
         const songTitle = file.name.slice(0, extensionIndex);
