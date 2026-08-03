@@ -151,7 +151,6 @@ body {
 
     border: 2px solid transparent;
     border-color: transparent var(--button-outer-border-color) transparent var(--button-outer-border-color);
-    /* border-color: #00c853; TODO: READY statusのときこのカラーコード使う。*/
     animation: rotate-loading 8s linear infinite;
 }
 
