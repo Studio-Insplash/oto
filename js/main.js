@@ -27,13 +27,16 @@ fileInput.addEventListener('change', (e) => {
 async function transitionToReady() {
     const minimumWaitTime = MINIMUM_GENERATING_TIME - (end - start);
     if (minimumWaitTime > 0) {
-        await new Promise(resolve => {
-            setTimeout(resolve, minimumWaitTime);
-        })
+        await new Promise(resolve => setTimeout(resolve, minimumWaitTime));
     }
     curState.status = "READY";
     importSection.classList.remove("generating");
     importSection.classList.add("ready");
+
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    switchSection("playing");
+    console.log("switched.")
 }
 
 /* プレイリスト変換器 */
@@ -52,19 +55,14 @@ function playListConverter(files) {
     }
 }
 
-/* 現在これは手動でセクションのスイッチを担当してるが、理想は、
-   現在のstateがreadyになったら自動的にimportセクションからplayingセクションに変える。
-    */
+/* section switch */
 function switchSection(target) {
     const allSection = document.querySelectorAll("section")
     for (const curSection of allSection) {
-        if (curSection.id == target) {
-            curSection.hidden = false
-        }
-        else {
-            curSection.hidden = true
-        }
+        curSection.classList.remove("active");
     }
+    document.getElementById(target).classList.add("active");
 }
 
-switchSection("import")
+// init call
+switchSection("import");
