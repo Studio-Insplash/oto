@@ -11,9 +11,7 @@
     --inner-bg-color: #000000;
     --button-bg-color: #1a1714;
     --button-border-color: #ff7f00;
-    --button-basic-svg-color: #ffffff;
-    --button-rocket-svg-color: #9556fa;
-    --button-check-svg-color: #00c853;
+    --button-svg-color: #ffffff;
     --button-outer-border-color: #e7dcdc;
     --status-text-color: #e8e4de;
 }
@@ -45,29 +43,50 @@ body {
 }
 
 /* IDLE STATE */
+#import .upload-btn {
+    color: var(--button-svg-color);
+}
 #import .bi-rocket-fill,
 #import .bi-check-lg {
     display: none;
 }
 
 /* GENERATING STATE */
+#import.generating .upload-btn {
+    --button-svg-color: #9556fa;
+}
 #import.generating .bi-upload,
 #import.generating .bi-check-lg {
     display: none;
 }
 #import.generating .bi-rocket-fill {
     display: block;
-    color: var(--button-rocket-svg-color);
+}
+#import.generating .drop-area::before {
+    animation: rotate-loading 0.5s linear infinite;
+}
+#import.generating .upload-btn::before {
+    animation: rotate-loading 1s linear infinite;
+    --button-outer-border-color: #D500F9;
 }
 
 /* READY STATE */
+#import.ready .upload-btn {
+    --button-svg-color: #00c853;
+}
 #import.ready .bi-upload,
 #import.ready .bi-rocket-fill {
     display: none;
 }
 #import.ready .bi-check-lg {
     display: block;
-    color: var(--button-check-svg-color);
+}
+#import.ready .drop-area::before {
+    border-color: var(--button-border-color);
+}
+#import.ready .upload-btn::before {
+    --button-outer-border-color: #56FA6B;
+    border-color: var(--button-outer-border-color);
 }
 
 .drop-area {
@@ -115,7 +134,6 @@ body {
         -6px 0px 6px 0px rgba(87, 34, 34, 0.45),
         0px 6px 6px 0px rgba(87, 34, 34, 0.45),
         0px -6px 6px 0px rgba(87, 34, 34, 0.45);
-    color: var(--button-basic-svg-color);
     border-radius: 50%;
     height: 100px;
     width: 100px;
