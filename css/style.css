@@ -32,8 +32,15 @@ body {
     background-color: var(--bg-color);
 }
 
-#import {
+section {
+    display: none;
+}
+
+section.active {
     display: flex;
+}
+
+#import {
     flex-direction: column;
     align-items: center;
     justify-content: center;
