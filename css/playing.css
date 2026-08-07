@@ -1,0 +1,35 @@
+body.playing {
+    --bg-color: #12100e;
+    background-color: var(--bg-color);
+}
+
+#playing {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    width: 100%;
+}
+
+.now-playing {
+    --text-color: #a19e9e;
+    --bar-color: #a19e9e;
+    --status-color: #a19e9e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.5rem;
+}
+
+.track-title {
+    color: var(--text-color);
+    letter-spacing: 2px;
+}
+
+.progress-bar {
+    color: var(--bar-color);
+}
+
+.playback-status {
+    color: var(--status-color);
+}
