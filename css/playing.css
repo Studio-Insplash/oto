@@ -32,4 +32,6 @@ body.playing {
 
 .playback-status {
     color: var(--status-color);
+    display: flex;
+    gap: 20px;
 }
