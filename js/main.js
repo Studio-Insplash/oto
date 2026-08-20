@@ -12,9 +12,12 @@ function switchSection(target) {
         curSection.classList.remove("active");
     }
     document.getElementById(target).classList.add("active");
+    if (target === "playing") {
+        displayTrackTitle(); // ここはあとでplayingManagerに書き換える。
+    }
 }
 
 // init call
-// switchSection("import");
+switchSection("import");
 // DEV MODE
-switchSection("playing");
+// switchSection("playing");
