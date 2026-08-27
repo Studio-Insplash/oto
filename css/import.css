@@ -22,7 +22,8 @@ body.import {
 
 /* GENERATING STATE */
 #import.generating .upload-btn {
-    --button-svg-color: #9556fa;
+    --button-svg-color: #6e04b6;
+    --button-border-color: #cd510a;
 }
 #import.generating .bi-upload,
 #import.generating .bi-check-lg {
@@ -36,7 +37,7 @@ body.import {
 }
 #import.generating .upload-btn::before {
     animation: rotate-loading 1s linear infinite;
-    --button-outer-border-color: #D500F9;
+    --button-outer-border-color: #6e04b6;
 }
 
 /* READY STATE */

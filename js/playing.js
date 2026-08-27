@@ -6,5 +6,7 @@ function displayTrackTitle() {
 
 // TODO: playing状態を管理する関数を作る。
 function playingManager() {
-    // code here
+    currentTrackIndex = 0;
+    // displayTrackTitleを呼び、タイトルを表示
+    // playlist[currentTrackIndex].
 }
