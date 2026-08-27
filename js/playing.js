@@ -8,5 +8,7 @@ function displayTrackTitle() {
 function playingManager() {
     currentTrackIndex = 0;
     // displayTrackTitleを呼び、タイトルを表示
-    // playlist[currentTrackIndex].
+    // playlist[currentTrackIndex].urlをAudioオブジェクトに渡す。
+    // Audioオブジェクトで再生時間を基にプログレスバーを作成する。
+    // プログレスバー表示用関数に渡す。ここをどうしたら常に更新状態にできるかは課題
 }
