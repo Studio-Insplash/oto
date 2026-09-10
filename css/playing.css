@@ -35,7 +35,7 @@ body.playing {
     padding: 3px 0 3px 3px;
     box-sizing: border-box;
 
-    border: 1px solid var(--progress-bar-border-color);
+    border: 2.5px solid var(--progress-bar-border-color);
     border-radius: 4px;
 }
 
