@@ -13,7 +13,7 @@ function switchSection(target) {
     }
     document.getElementById(target).classList.add("active");
     if (target === "playing") {
-        displayTrackTitle(); // ここはあとでplayingManagerに書き換える。
+        playingManager();
     }
 }
 

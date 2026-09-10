@@ -15,6 +15,9 @@ body.playing {
     --text-color: #a19e9e;
     --bar-color: #a19e9e;
     --status-color: #a19e9e;
+    --progress-bar-border-color: #a19e9e;
+    --progress-bar-status-color: #029e43;
+    --progress-bar-divider-color: #12100e;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,7 +30,26 @@ body.playing {
 }
 
 .progress-bar {
-    color: var(--bar-color);
+    width: 188px;
+    height: 30px;
+    padding: 3px 0 3px 3px;
+    box-sizing: border-box;
+
+    border: 1px solid var(--progress-bar-border-color);
+    border-radius: 4px;
+}
+
+.progress-status {
+    width: 100%;
+    height: 100%;
+
+    background: repeating-linear-gradient(
+        to right,
+        var(--progress-bar-status-color) 0,
+        var(--progress-bar-status-color) 15px,
+        var(--progress-bar-divider-color) 15px,
+        var(--progress-bar-divider-color) 18px
+    );
 }
 
 .playback-status {
