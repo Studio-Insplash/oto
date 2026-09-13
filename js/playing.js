@@ -4,6 +4,12 @@ function displayTrackTitle(curIndex) {
     trackTitle.textContent = playlist[curIndex].title;
 }
 
+// A function for Display Progress bar
+function displayProgressBar(currentProgress) {
+    // write displaying progress bar
+    // cssのwidthがパーセンテージの値なのでそれをここからどう書き換えるか。
+}
+
 function playingManager() {
     currentTrackIndex = 0;
     // displayTrackTitleを呼び、タイトルを表示
