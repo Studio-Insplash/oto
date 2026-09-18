@@ -35,7 +35,6 @@ async function transitionToReady() {
     await new Promise(resolve => setTimeout(resolve, 3000));
 
     switchSection("playing");
-    console.log("switched.")
 }
 
 /* プレイリスト変換器 */

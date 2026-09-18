@@ -6,8 +6,9 @@ function displayTrackTitle(curIndex) {
 
 // A function for Display Progress bar
 function displayProgressBar(currentProgress) {
-    // write displaying progress bar
-    // cssのwidthがパーセンテージの値なのでそれをここからどう書き換えるか。
+    console.log("Current status: ", currentProgress);
+    const nowPlaying = document.querySelector(".now-playing");
+    nowPlaying.style.setProperty("--progress", currentProgress.toString() + "%");
 }
 
 function playingManager() {
@@ -15,10 +16,13 @@ function playingManager() {
     // displayTrackTitleを呼び、タイトルを表示
     displayTrackTitle(currentTrackIndex);
     audio = new Audio(playlist[currentTrackIndex].url);
-    // Audioオブジェクトで再生時間を基にプログレスバーを作成する。
-    trackDuration = audio.duration;
-    // TODO このcurrentTimeは更新が前提なので更新をどうするかを考える必要がある。
-    currentTime = audio.currentTime;
-    currentProgress = Math.floor(currentTime / trackDuration * 10) * 10;
-    // プログレスバー表示用関数に渡す。ここをどうしたら常に更新状態にできるかは課題
+    audio.addEventListener("loadedmetadata", () => {
+        trackDuration = audio.duration;
+        console.log("duration: ", trackDuration);
+        // TODO このcurrentTimeは更新が前提なので更新をどうするかを考える必要がある。
+        currentTime = audio.currentTime;
+        currentProgress = Math.floor(currentTime / trackDuration * 10) * 10;
+        // プログレスバー表示用関数に渡す。ここをどうしたら常に更新状態にできるかは課題
+        displayProgressBar(currentProgress);
+    });
 }
