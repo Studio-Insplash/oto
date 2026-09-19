@@ -11,18 +11,22 @@ function displayProgressBar(currentProgress) {
     nowPlaying.style.setProperty("--progress", currentProgress.toString() + "%");
 }
 
-function playingManager() {
+async function playingManager() {
     currentTrackIndex = 0;
     // displayTrackTitleを呼び、タイトルを表示
     displayTrackTitle(currentTrackIndex);
     audio = new Audio(playlist[currentTrackIndex].url);
-    audio.addEventListener("loadedmetadata", () => {
-        trackDuration = audio.duration;
-        console.log("duration: ", trackDuration);
-        // TODO このcurrentTimeは更新が前提なので更新をどうするかを考える必要がある。
+    trackDuration = await new Promise((resolve, reject) => {
+        audio.addEventListener("loadedmetadata", () => {
+            resolve(audio.duration);
+        })
+        setTimeout(() => {
+            reject("Failed to load the track data");
+        }, 3000);
+    })
+    setInterval(() => {
         currentTime = audio.currentTime;
         currentProgress = Math.floor(currentTime / trackDuration * 10) * 10;
-        // プログレスバー表示用関数に渡す。ここをどうしたら常に更新状態にできるかは課題
         displayProgressBar(currentProgress);
-    });
+    }, 1000);
 }
