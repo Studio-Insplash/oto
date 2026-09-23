@@ -29,4 +29,9 @@ async function playingManager() {
         currentProgress = Math.floor(currentTime / trackDuration * 10) * 10;
         displayProgressBar(currentProgress);
     }, 1000);
+    // 曲ごとの再生、停止に関する操作群をここから書く。
+    // audio.play().catch((error) => {
+    //     console.log(error);
+    // });
+    audio.play();
 }
