@@ -2,14 +2,25 @@ const trackTitle = document.querySelector(".track-title");
 
 // Playback Controller
 class PlaybackController {
-    // constructorいる？
-
-    play() {
-        //
+    async generateAudio(curIndex) {
+        const audio = new Audio(playlist[curIndex].url);
+        const trackDuration = await new Promise((resolve, reject) => {
+            audio.addEventListener("loadedmetadata", () => {
+                resolve(audio.duration);
+            })
+            setTimeout(() => {
+                reject("Failed to load the track data");
+            }, 3000);
+        })
+        return [audio, trackDuration];
     }
 
-    pause() {
-        //
+    play(audio) {
+        audio.play();
+    }
+
+    pause(audio) {
+        audio.pause();
     }
 }
 
@@ -61,29 +72,29 @@ function displayProgressBar(currentProgress) {
     nowPlaying.style.setProperty("--progress", currentProgress.toString() + "%");
 }
 
-// Generate audio object, これはplaybackControllerに統合
-async function generateAudio(curIndex) {
-    audio = new Audio(playlist[curIndex].url);
-    trackDuration = await new Promise((resolve, reject) => {
-        audio.addEventListener("loadedmetadata", () => {
-            resolve(audio.duration);
-        })
-        setTimeout(() => {
-            reject("Failed to load the track data");
-        }, 3000);
-    })
-    return [audio, trackDuration];
-}
-
 async function playingManager() {
     const playlistController = new PlaylistController();
+    const playbackController = new PlaybackController();
     displayTrackTitle(playlistController.curIndex);
-    const [ audio, trackDuration ] = await generateAudio(playlistController.curIndex);
+    const [ audio, trackDuration ] = await playbackController.generateAudio(playlistController.curIndex);
     setInterval(() => {
         currentTime = audio.currentTime;
         currentProgress = Math.floor(currentTime / trackDuration * 10) * 10;
         displayProgressBar(currentProgress);
     }, 1000);
-    // 曲ごとの再生、停止に関する操作群をここから書く。
+
+    // playで仮置き。
     audio.play();
+
+    // ここから曲の再生や停止をinteraction contorollerやイベントを使って連動させていく。
+    audio.addEventListener("ended", async () => {
+        // このifの前に現在のプレイリストの状態を調べる必要があるが、現時点では通常モードと仮置く。
+        if (playlistController.curIndex == playlist.length - 1) {
+            // 通常の流れは終わり。return?それとも止める方法がほかにある？
+        }
+        playlistController.next();
+        displayTrackTitle(playlistController.curIndex);
+        const [ audio, trackDuration ] = await playbackController.generateAudio(playlistController.curIndex);
+        audio.play();
+    })
 }
