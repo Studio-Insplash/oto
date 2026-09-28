@@ -2,8 +2,12 @@ const trackTitle = document.querySelector(".track-title");
 
 // Playback Controller
 class PlaybackController {
-    async generateAudio(curIndex) {
+    generateAudio(curIndex) {
         const audio = new Audio(playlist[curIndex].url);
+        return audio;
+    }
+
+    async getTrackDuration(audio) {
         const trackDuration = await new Promise((resolve, reject) => {
             audio.addEventListener("loadedmetadata", () => {
                 resolve(audio.duration);
@@ -12,7 +16,7 @@ class PlaybackController {
                 reject("Failed to load the track data");
             }, 3000);
         })
-        return [audio, trackDuration];
+        return trackDuration;
     }
 
     play(audio) {
@@ -76,7 +80,8 @@ async function playingManager() {
     const playlistController = new PlaylistController();
     const playbackController = new PlaybackController();
     displayTrackTitle(playlistController.curIndex);
-    const [ audio, trackDuration ] = await playbackController.generateAudio(playlistController.curIndex);
+    const audio = playbackController.generateAudio(playlistController.curIndex);
+    let trackDuration = await playbackController.getTrackDuration(audio);
     setInterval(() => {
         currentTime = audio.currentTime;
         currentProgress = Math.floor(currentTime / trackDuration * 10) * 10;
@@ -94,7 +99,9 @@ async function playingManager() {
         }
         playlistController.next();
         displayTrackTitle(playlistController.curIndex);
-        const [ audio, trackDuration ] = await playbackController.generateAudio(playlistController.curIndex);
+        audio.src = playlist[playlistController.curIndex].url;
+        audio.currentTime = 0;
+        trackDuration = await playbackController.getTrackDuration(audio);
         audio.play();
     })
 }
