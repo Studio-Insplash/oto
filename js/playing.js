@@ -86,13 +86,18 @@ async function playingManager() {
         currentTime = audio.currentTime;
         currentProgress = Math.floor(currentTime / trackDuration * 10) * 10;
         displayProgressBar(currentProgress);
-    }, 1000);
+    }, 100);
 
     // playで仮置き。
     audio.play();
 
     // ここから曲の再生や停止をinteraction contorollerやイベントを使って連動させていく。
     audio.addEventListener("ended", async () => {
+        await new Promise(resolve => {
+            setTimeout(() => {
+                resolve();
+            }, 3000); // ここの間隔を調整すればプログレスバーを正常に保ちながら曲間の移動時間をコントロール可能
+        });
         // このifの前に現在のプレイリストの状態を調べる必要があるが、現時点では通常モードと仮置く。
         if (playlistController.curIndex == playlist.length - 1) {
             // 通常の流れは終わり。return?それとも止める方法がほかにある？
