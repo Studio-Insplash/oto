@@ -32,7 +32,7 @@ class PlaybackController {
 class PlaylistController {
     constructor() {
         this.isLooping = false;
-        this.isShuffling = false;
+        this.isShuffling = true; // TEST ON
         this.curIndex = 0;
     }
 
@@ -88,8 +88,8 @@ async function playingManager() {
         displayProgressBar(currentProgress);
     }, 100);
 
-    // playで仮置き。
-    audio.play();
+    // 最初の再生
+    playbackController.play(audio);
 
     // ここから曲の再生や停止をinteraction contorollerやイベントを使って連動させていく。
     audio.addEventListener("ended", async () => {
@@ -98,15 +98,31 @@ async function playingManager() {
                 resolve();
             }, 3000); // ここの間隔を調整すればプログレスバーを正常に保ちながら曲間の移動時間をコントロール可能
         });
-        // このifの前に現在のプレイリストの状態を調べる必要があるが、現時点では通常モードと仮置く。
-        if (playlistController.curIndex == playlist.length - 1) {
-            // 通常の流れは終わり。return?それとも止める方法がほかにある？
+        // ここでシャッフル、ループ、通常かを判断
+        if (playlistController.isLooping) {
+            playlistController.next();
         }
-        playlistController.next();
+        else if (playlistController.isShuffling) {
+            const random = Math.floor(Math.random() * playlist.length);
+            const nextIndex = (playlistController.curIndex + random) % playlist.length;
+            if (nextIndex == playlistController.curIndex) {
+                playlistController.next();
+            }
+            else {
+                playlistController.curIndex = nextIndex;
+            }
+        }
+        else {
+            // 通常モードの挙動
+            if ( playlistController.curIndex + 1 == playlist.length ) {
+                return;
+            }
+            playlistController.next();
+        }
         displayTrackTitle(playlistController.curIndex);
         audio.src = playlist[playlistController.curIndex].url;
         audio.currentTime = 0;
         trackDuration = await playbackController.getTrackDuration(audio);
-        audio.play();
+        playbackController.play(audio); // 次の曲の再生をスタート
     })
 }
