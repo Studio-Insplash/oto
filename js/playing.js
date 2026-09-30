@@ -19,6 +19,15 @@ class PlaybackController {
         return trackDuration;
     }
 
+    togglePlayPause(audio) {
+        if (audio.paused) {
+            this.play(audio);
+        }
+        else {
+            this.pause(audio);
+        }
+    }
+
     play(audio) {
         audio.play();
     }
@@ -32,7 +41,7 @@ class PlaybackController {
 class PlaylistController {
     constructor() {
         this.isLooping = false;
-        this.isShuffling = true; // TEST ON
+        this.isShuffling = false;
         this.curIndex = 0;
     }
 
@@ -63,8 +72,6 @@ class PlaylistController {
     }
 }
 
-// Interaction Controller
-
 function displayTrackTitle(curIndex) {
     trackTitle.textContent = playlist[curIndex].title;
 }
@@ -77,6 +84,7 @@ function displayProgressBar(currentProgress) {
 }
 
 async function playingManager() {
+    const screen = document.getElementById("playing");
     const playlistController = new PlaylistController();
     const playbackController = new PlaybackController();
     displayTrackTitle(playlistController.curIndex);
@@ -125,4 +133,13 @@ async function playingManager() {
         trackDuration = await playbackController.getTrackDuration(audio);
         playbackController.play(audio); // 次の曲の再生をスタート
     })
+
+    // 再生・一時停止のイベント
+    screen.addEventListener("click", () => {
+        playbackController.togglePlayPause(audio);
+    })
+    
+    // 次の曲・前の曲へのイベント
+    // ループ
+    // シャッフル
 }
