@@ -1,3 +1,6 @@
+// Register Service Worker
+navigator.serviceWorker.register("sw.js")
+
 let playlist = [];
 
 /* section switch */
