@@ -9,6 +9,7 @@ body.playing {
     justify-content: center;
     height: 70%;
     width: 100%;
+    user-select: none;
 }
 
 .now-playing {
@@ -67,7 +68,7 @@ body.playing {
 }
 
 #charCircle {
-    display: fixed;
+    position: fixed;
 }
 
 text {
