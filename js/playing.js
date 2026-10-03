@@ -127,6 +127,7 @@ async function playingManager() {
             }
             playlistController.next();
         }
+        // audioを再生するための処理群
         displayTrackTitle(playlistController.curIndex);
         audio.src = playlist[playlistController.curIndex].url;
         audio.currentTime = 0;
@@ -140,6 +141,32 @@ async function playingManager() {
     })
     
     // 次の曲・前の曲へのイベント
+    let start;
+    screen.addEventListener("touchstart", (e) => {
+        start = e.touches[0].clientX;
+    })
+    screen.addEventListener("touchend", async (e) => {
+        let end = e.changedTouches[0].clientX;
+        let diff = end - start;
+        if (diff > 0) {
+            playlistController.next();
+            // audioを再生するための処理群
+            displayTrackTitle(playlistController.curIndex);
+            audio.src = playlist[playlistController.curIndex].url;
+            audio.currentTime = 0;
+            trackDuration = await playbackController.getTrackDuration(audio);
+            playbackController.play(audio); // 次の曲の再生をスタート
+        }
+        else if (diff < 0) {
+            playlistController.previous();
+            // audioを再生するための処理群
+            displayTrackTitle(playlistController.curIndex);
+            audio.src = playlist[playlistController.curIndex].url;
+            audio.currentTime = 0;
+            trackDuration = await playbackController.getTrackDuration(audio);
+            playbackController.play(audio); // 次の曲の再生をスタート
+        }
+    })
     // ループ
     // シャッフル
 }
