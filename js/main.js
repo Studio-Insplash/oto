@@ -21,6 +21,6 @@ function switchSection(target) {
 }
 
 // init call
-switchSection("import");
+// switchSection("import");
 // DEV MODE
-// switchSection("playing");
+switchSection("playing");

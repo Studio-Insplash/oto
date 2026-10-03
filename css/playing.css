@@ -18,6 +18,9 @@ body.playing {
     --progress-bar-border-color: #a19e9e;
     --progress-bar-status-color: #029e43;
     --progress-bar-divider-color: #12100e;
+    --circle-character-color: #a19e9e;
+    --repeat-color: #a19e9e;
+    --shuffle-color: #a19e9e;
     --progress: 0%;
     display: flex;
     flex-direction: column;
@@ -57,4 +60,33 @@ body.playing {
     color: var(--status-color);
     display: flex;
     gap: 20px;
+}
+
+.bi-repeat {
+    fill: var(--repeat-color);
+}
+
+#charCircle {
+    display: fixed;
+}
+
+text {
+    font-size: 14px;
+    fill: var(--circle-character-color);
+    letter-spacing: 1.8px;
+}
+
+tspan {
+    opacity: 0;
+    animation: appear 0.1s linear forwards;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
