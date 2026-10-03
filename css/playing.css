@@ -15,6 +15,7 @@ text,
 .track-title,
 tspan {
     user-select: none;
+    -webkit-user-select: none;
 }
 
 .now-playing {
