@@ -153,9 +153,10 @@ async function playingManager() {
         setTimeout(() => {
             const characters = document.querySelectorAll("tspan");
             const charLength = characters.length;
-            const charDelay = 1.2 / charLength;
+            const charDelay = 4 / charLength;
             for (let i = 0; i < charLength; i++) {
                 const character = characters[i];
+                character.style.animation = "appear 0.1s linear";
                 character.style.animationDelay = charDelay * i;
             }
             playlistController.toggleLoop();
@@ -166,7 +167,7 @@ async function playingManager() {
             else {
                 loop.style.setProperty("--repeat-color", "#a19e9e");
             }
-        }, 1200);
+        }, 4000);
     })
     screen.addEventListener("touchend", async (e) => {
         let end = e.changedTouches[0].clientX;
