@@ -94,7 +94,7 @@ async function playingManager() {
         currentTime = audio.currentTime;
         currentProgress = Math.floor(currentTime / trackDuration * 10) * 10;
         displayProgressBar(currentProgress);
-    }, 100);
+    }, 100); // これと連動してclearIntervalが必要かも？
 
     // 最初の再生
     playbackController.play(audio);
@@ -105,6 +105,7 @@ async function playingManager() {
             setTimeout(() => {
                 resolve();
             }, 3000); // ここの間隔を調整すればプログレスバーを正常に保ちながら曲間の移動時間をコントロール可能
+            // ここにもclearTimeoutが必要かも
         });
         // ここでシャッフル、ループ、通常かを判断
         if (playlistController.isLooping) {
@@ -140,10 +141,32 @@ async function playingManager() {
         playbackController.togglePlayPause(audio);
     })
     
-    // 次の曲・前の曲へのイベント
+    // 次の曲・前の曲のイベント・ループイベント
     let start;
     screen.addEventListener("touchstart", (e) => {
         start = e.touches[0].clientX;
+        const xCoordinate = start;
+        const yCoordinate = e.touches[0].clientY;
+        const circleCoordinate = document.getElementById("charCircle");
+        circleCoordinate.style.left = xCoordinate - 60;
+        circleCoordinate.style.top = yCoordinate - 60;
+        setTimeout(() => {
+            const characters = document.querySelectorAll("tspan");
+            const charLength = characters.length;
+            const charDelay = 1.2 / charLength;
+            for (let i = 0; i < charLength; i++) {
+                const character = characters[i];
+                character.style.animationDelay = charDelay * i;
+            }
+            playlistController.toggleLoop();
+            const loop = document.querySelector(".bi-repeat");
+            if (playlistController.isLooping) {
+                loop.style.setProperty("--repeat-color", "#029e43");
+            }
+            else {
+                loop.style.setProperty("--repeat-color", "#a19e9e");
+            }
+        }, 1200);
     })
     screen.addEventListener("touchend", async (e) => {
         let end = e.changedTouches[0].clientX;
@@ -167,6 +190,6 @@ async function playingManager() {
             playbackController.play(audio); // 次の曲の再生をスタート
         }
     })
-    // ループ
+
     // シャッフル
 }
