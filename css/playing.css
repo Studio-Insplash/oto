@@ -9,6 +9,11 @@ body.playing {
     justify-content: center;
     height: 70%;
     width: 100%;
+}
+
+text,
+.track-title,
+tspan {
     user-select: none;
 }
 
@@ -32,6 +37,7 @@ body.playing {
 .track-title {
     color: var(--text-color);
     letter-spacing: 2px;
+    user-select: none;
 }
 
 .progress-bar {
