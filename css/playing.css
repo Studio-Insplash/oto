@@ -38,7 +38,6 @@ tspan {
 .track-title {
     color: var(--text-color);
     letter-spacing: 2px;
-    user-select: none;
 }
 
 .progress-bar {
