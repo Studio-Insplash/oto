@@ -72,6 +72,8 @@ class PlaylistController {
     }
 }
 
+
+// Display song title
 function displayTrackTitle(curIndex) {
     trackTitle.textContent = playlist[curIndex].title;
 }
@@ -83,30 +85,39 @@ function displayProgressBar(currentProgress) {
     nowPlaying.style.setProperty("--progress", currentProgress.toString() + "%");
 }
 
+// audioを繰り返し再生するためのギミック関数
+async function playCurrentTrack(audio, playlistController, playbackController) {
+    displayTrackTitle(playlistController.curIndex);
+    audio.src = playlist[playlistController.curIndex].url;
+    audio.currentTime = 0;
+    trackDuration = await playbackController.getTrackDuration(audio);
+    playbackController.play(audio);
+    return trackDuration;
+}
+
 async function playingManager() {
-    const screen = document.getElementById("playing");
+    // 初期セットアップ
     const playlistController = new PlaylistController();
     const playbackController = new PlaybackController();
     displayTrackTitle(playlistController.curIndex);
     const audio = playbackController.generateAudio(playlistController.curIndex);
     let trackDuration = await playbackController.getTrackDuration(audio);
+
+    // プログレスバーの定期更新ギミック
     setInterval(() => {
         currentTime = audio.currentTime;
         currentProgress = Math.floor(currentTime / trackDuration * 10) * 10;
         displayProgressBar(currentProgress);
-    }, 100); // これと連動してclearIntervalが必要かも？
-
-    // 最初の再生
-    playbackController.play(audio);
+    }, 100);
 
     // ここから曲の再生や停止をinteraction contorollerやイベントを使って連動させていく。
     audio.addEventListener("ended", async () => {
         await new Promise(resolve => {
             setTimeout(() => {
                 resolve();
-            }, 3000); // ここの間隔を調整すればプログレスバーを正常に保ちながら曲間の移動時間をコントロール可能
-            // ここにもclearTimeoutが必要かも
+            }, 3000); 
         });
+
         // ここでシャッフル、ループ、通常かを判断
         if (playlistController.isLooping) {
             playlistController.next();
@@ -128,69 +139,7 @@ async function playingManager() {
             }
             playlistController.next();
         }
-        // audioを再生するための処理群
-        displayTrackTitle(playlistController.curIndex);
-        audio.src = playlist[playlistController.curIndex].url;
-        audio.currentTime = 0;
-        trackDuration = await playbackController.getTrackDuration(audio);
-        playbackController.play(audio); // 次の曲の再生をスタート
-    })
 
-    // 再生・一時停止のイベント
-    screen.addEventListener("click", () => {
-        playbackController.togglePlayPause(audio);
+        trackDuration = playCurrentTrack(audio, playlistController, playbackController);
     })
-    
-    // 次の曲・前の曲のイベント・ループイベント
-    let start;
-    screen.addEventListener("touchstart", (e) => {
-        start = e.touches[0].clientX;
-        const xCoordinate = start;
-        const yCoordinate = e.touches[0].clientY;
-        const circleCoordinate = document.getElementById("charCircle");
-        circleCoordinate.style.left = xCoordinate - 60;
-        circleCoordinate.style.top = yCoordinate - 60;
-        setTimeout(() => {
-            const characters = document.querySelectorAll("tspan");
-            const charLength = characters.length;
-            const charDelay = 4 / charLength;
-            for (let i = 0; i < charLength; i++) {
-                const character = characters[i];
-                character.style.animation = "appear 0.1s linear";
-                character.style.animationDelay = charDelay * i;
-            }
-            playlistController.toggleLoop();
-            const loop = document.querySelector(".bi-repeat");
-            if (playlistController.isLooping) {
-                loop.style.setProperty("--repeat-color", "#029e43");
-            }
-            else {
-                loop.style.setProperty("--repeat-color", "#a19e9e");
-            }
-        }, 4000);
-    })
-    screen.addEventListener("touchend", async (e) => {
-        let end = e.changedTouches[0].clientX;
-        let diff = end - start;
-        if (diff > 0) {
-            playlistController.next();
-            // audioを再生するための処理群
-            displayTrackTitle(playlistController.curIndex);
-            audio.src = playlist[playlistController.curIndex].url;
-            audio.currentTime = 0;
-            trackDuration = await playbackController.getTrackDuration(audio);
-            playbackController.play(audio); // 次の曲の再生をスタート
-        }
-        else if (diff < 0) {
-            playlistController.previous();
-            // audioを再生するための処理群
-            displayTrackTitle(playlistController.curIndex);
-            audio.src = playlist[playlistController.curIndex].url;
-            audio.currentTime = 0;
-            trackDuration = await playbackController.getTrackDuration(audio);
-            playbackController.play(audio); // 次の曲の再生をスタート
-        }
-    })
-
-    // シャッフル
 }
