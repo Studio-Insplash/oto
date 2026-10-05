@@ -72,6 +72,11 @@ class PlaylistController {
     }
 }
 
+// Interaction Controller
+class InteractionController {
+    //
+}
+
 
 // Display song title
 function displayTrackTitle(curIndex) {
@@ -110,6 +115,9 @@ async function playingManager() {
         displayProgressBar(currentProgress);
     }, 100);
 
+    // 最初の再生
+    playbackController.play(audio);
+
     // ここから曲の再生や停止をinteraction contorollerやイベントを使って連動させていく。
     audio.addEventListener("ended", async () => {
         await new Promise(resolve => {
@@ -139,7 +147,6 @@ async function playingManager() {
             }
             playlistController.next();
         }
-
         trackDuration = playCurrentTrack(audio, playlistController, playbackController);
     })
 }
