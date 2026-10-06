@@ -149,4 +149,17 @@ async function playingManager() {
         }
         trackDuration = playCurrentTrack(audio, playlistController, playbackController);
     })
+
+    /*
+        tapはtouchend側で判定できる。0.4秒以下であればtap
+        swipeはtouchend側でｘ座標の差が40px以上かつ、長さが1秒以内ならswipe
+        holdは0.5秒以上かつｘ座標の差が40px未満
+    */
+    screen.addEventListener("touchstart", () => {
+        //
+    })
+
+    screen.addEventListener("touchend", () => {
+        //
+    })
 }
