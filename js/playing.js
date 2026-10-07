@@ -92,7 +92,7 @@ class InteractionController {
     }
 
     detectGesture(playbackController, playlistController, audio) {
-        const diffX = this.xStart - this.xEnd;
+        const diffX = this.xEnd - this.xStart;
         const elapsedTime = this.endTime - this.startTime;
 
         if (elapsedTime <= 400 && Math.abs(diffX) < 40) {
