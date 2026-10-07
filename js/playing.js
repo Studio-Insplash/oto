@@ -116,9 +116,9 @@ class InteractionController {
             playlistController.toggleLoop();
             // animation
             const characters = document.querySelectorAll("tspan");
-            const animationDelay = 0.5;
+            const animationDelay = 0.2;
             characters.forEach((character, index) => {
-                character.style.animation = "appear 0.5s infinite";
+                character.style.animation = "appear 0.3s";
                 character.style.animationDelay = `${animationDelay * index}s`;
             });
             const repeatColor = document.querySelector(".bi-repeat");
