@@ -122,7 +122,7 @@ class InteractionController {
             circlePosition.style.left = `${this.xStart - 60}px`;
             // animation
             const characters = document.querySelectorAll("tspan");
-            const animationDelay = 0.1;
+            const animationDelay = 0.05;
             characters.forEach((character, index) => {
                 character.style.animation = "appear 0.3s";
                 character.style.animationDelay = `${animationDelay * index}s`;
