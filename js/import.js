@@ -40,6 +40,7 @@ async function transitionToReady() {
 /* プレイリスト変換器 */
 function playListConverter(files) {
     for (const file of files) {
+        console.log(file.type);
         if (file.type !== "audio/mpeg" && file.type !== "audio/wav") {
             continue;
         }
