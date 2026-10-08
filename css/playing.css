@@ -9,6 +9,8 @@ body.playing {
     justify-content: center;
     height: 70%;
     width: 100%;
+
+    -webkit-touch-callout: none;
 }
 
 text,
