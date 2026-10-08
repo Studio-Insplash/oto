@@ -104,11 +104,11 @@ class InteractionController {
         else if (elapsedTime <= 1000 && Math.abs(diffX) >= 40) {
             // ここでdiffXの符号を使い左と右の判定でswipe
             if (diffX < 0) {
-                playlistController.previous();
+                playlistController.next();
                 playCurrentTrack(audio, playlistController, playbackController);
             }
             else if (diffX > 0) {
-                playlistController.next();
+                playlistController.previous();
                 playCurrentTrack(audio, playlistController, playbackController);
             }
         }
@@ -239,5 +239,10 @@ async function playingManager() {
         time = performance.now();
         interactionController.logEnd(xCoordinate, time);
         interactionController.detectGesture(playbackController, playlistController, audio);
+    })
+
+    // 強く押し込んだ時のブラウザ側の検知を無効化
+    screen.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
     })
 }
