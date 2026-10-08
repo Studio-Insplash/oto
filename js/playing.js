@@ -96,6 +96,7 @@ class InteractionController {
     async detectGesture(playbackController, playlistController, audio) {
         const diffX = this.xEnd - this.xStart;
         const elapsedTime = this.endTime - this.startTime;
+        let currentTrackDuration = audio.duration;
 
         if (elapsedTime <= 400 && Math.abs(diffX) < 40) {
             // tap
@@ -105,11 +106,11 @@ class InteractionController {
             // ここでdiffXの符号を使い左と右の判定でswipe
             if (diffX < 0) {
                 playlistController.next();
-                playCurrentTrack(audio, playlistController, playbackController);
+                currentTrackDuration = playCurrentTrack(audio, playlistController, playbackController);
             }
             else if (diffX > 0) {
                 playlistController.previous();
-                playCurrentTrack(audio, playlistController, playbackController);
+                currentTrackDuration = playCurrentTrack(audio, playlistController, playbackController);
             }
         }
         else if (elapsedTime >= 500 && Math.abs(diffX) < 40) {
@@ -143,6 +144,7 @@ class InteractionController {
                 character.style.animation = "none";
             })            
         }
+        return currentTrackDuration;
     }
 }
 
@@ -216,7 +218,7 @@ async function playingManager() {
             }
             playlistController.next();
         }
-        trackDuration = playCurrentTrack(audio, playlistController, playbackController);
+        trackDuration = await playCurrentTrack(audio, playlistController, playbackController);
     })
 
     /*
@@ -234,10 +236,10 @@ async function playingManager() {
         interactionController.logStart(xCoordinate, yCoordinate, time);
     })
 
-    screen.addEventListener("touchend", (e) => {
+    screen.addEventListener("touchend", async (e) => {
         xCoordinate = e.changedTouches[0].clientX;
         time = performance.now();
         interactionController.logEnd(xCoordinate, time);
-        interactionController.detectGesture(playbackController, playlistController, audio);
+        trackDuration = await interactionController.detectGesture(playbackController, playlistController, audio);
     })
 }
