@@ -18,6 +18,7 @@ text,
 tspan {
     user-select: none;
     touch-action: none;
+    -webkit-user-select: none;
 }
 
 .now-playing {
