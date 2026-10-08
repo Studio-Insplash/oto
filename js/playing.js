@@ -240,9 +240,4 @@ async function playingManager() {
         interactionController.logEnd(xCoordinate, time);
         interactionController.detectGesture(playbackController, playlistController, audio);
     })
-
-    // 強く押し込んだ時のブラウザ側の検知を無効化
-    screen.addEventListener("contextmenu", (e) => {
-        e.preventDefault();
-    })
 }
