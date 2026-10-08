@@ -76,14 +76,16 @@ class PlaylistController {
 class InteractionController {
     constructor () {
         this.xStart = 0;
+        this.yStart = 0;
         this.xEnd = 0;
         this.startTime = 0;
         this.endTime = 0;
     }
 
-    logStart(coordinate, time) {
-        this.xStart = coordinate;
+    logStart(xCoordinate, yCoordinate, time) {
+        this.xStart = xCoordinate;
         this.startTime = time;
+        this.yStart = yCoordinate
     }
 
     logEnd(coordinate, time) {
@@ -114,6 +116,10 @@ class InteractionController {
             /* Hold */
             // toggle looping
             playlistController.toggleLoop();
+            // draw position
+            const circlePosition = document.getElementById("charCircle");
+            circlePosition.style.top = `${this.yStart - 60}px`;
+            circlePosition.style.left = `${this.xStart - 60}px`;
             // animation
             const characters = document.querySelectorAll("tspan");
             const animationDelay = 0.2;
@@ -217,8 +223,9 @@ async function playingManager() {
     let time = 0;
     screen.addEventListener("touchstart", (e) => {
         xCoordinate = e.touches[0].clientX;
+        yCoordinate = e.touches[0].clientY;
         time = performance.now();
-        interactionController.logStart(xCoordinate, time);
+        interactionController.logStart(xCoordinate, yCoordinate, time);
     })
 
     screen.addEventListener("touchend", (e) => {
