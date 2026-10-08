@@ -93,7 +93,7 @@ class InteractionController {
         this.endTime = time;
     }
 
-    detectGesture(playbackController, playlistController, audio) {
+    async detectGesture(playbackController, playlistController, audio) {
         const diffX = this.xEnd - this.xStart;
         const elapsedTime = this.endTime - this.startTime;
 
@@ -134,15 +134,17 @@ class InteractionController {
             else {
                 repeatColor.style.fill = "#a19e9e";
             }
+            const waitTime = (animationDelay * 31 + 0.3) * 1000;
             // To reset animation
-            // characters.forEach((character) => {
-            //     character.style.animation = "none";
-            // })
-            
+            await new Promise(resolve => {
+                setTimeout(resolve, waitTime);
+            });
+            characters.forEach((character) => {
+                character.style.animation = "none";
+            })            
         }
     }
 }
-
 
 // Display song title
 function displayTrackTitle(curIndex) {
