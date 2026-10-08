@@ -12,6 +12,7 @@ body.playing {
 }
 
 #charCircle,
+textPath,
 text,
 .track-title,
 tspan {
