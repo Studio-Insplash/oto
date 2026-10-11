@@ -41,29 +41,6 @@ tspan {
     letter-spacing: 2px;
 }
 
-.progress-bar {
-    width: 187px;
-    height: 30px;
-    padding: 3px 0px 3px 3px;
-    box-sizing: border-box;
-
-    border: 2px solid var(--progress-bar-border-color);
-    border-radius: 4px;
-}
-
-.progress-status {
-    width: var(--progress);
-    height: 100%;
-
-    background: repeating-linear-gradient(
-        to right,
-        var(--progress-bar-status-color) 0,
-        var(--progress-bar-status-color) 15px,
-        var(--progress-bar-divider-color) 15px,
-        var(--progress-bar-divider-color) 18px
-    );
-}
-
 .playback-status {
     color: var(--status-color);
     display: flex;
@@ -72,28 +49,4 @@ tspan {
 
 .bi-repeat {
     fill: var(--repeat-color);
-}
-
-#charCircle {
-    position: fixed;
-}
-
-text {
-    font-size: 14px;
-    fill: var(--circle-character-color);
-    letter-spacing: 1.8px;
-}
-
-tspan {
-    opacity: 0;
-}
-
-@keyframes appear {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
 }
