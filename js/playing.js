@@ -191,6 +191,6 @@ function playingManager() {
         xCoordinate = e.changedTouches[0].clientX;
         const yCoordinate = e.changedTouches[0].clientY;
         interactionController.logEnd(xCoordinate, yCoordinate);
-        interactionController.detectGesture(playbackController, playlistController, audio);
+        interactionController.detectSwipe(playbackController, playlistController, audio);
     })
 }
