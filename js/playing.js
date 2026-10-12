@@ -66,6 +66,7 @@ class InteractionController {
         this.xStart = 0;
         this.yStart = 0;
         this.xEnd = 0;
+        this.yEnd = 0;
     }
 
     logStart(xCoordinate, yCoordinate) {
@@ -73,12 +74,50 @@ class InteractionController {
         this.yStart = yCoordinate
     }
 
-    logEnd(coordinate) {
-        this.xEnd = coordinate;
+    logEnd(xCoordinate, yCoordinate) {
+        this.xEnd = xCoordinate;
+        this.yEnd = yCoordinate;
     }
 
-    detectGesture(playbackController, playlistController, audio) {
+    detectTap(playbackController, audio) {
+        playbackController.togglePlayPause(audio);
+    }
+
+    detectSwipe(playlistController, playbackController, audio) {
         const diffX = this.xEnd - this.xStart;
+        const diffY = this.yEnd - this.yStart;
+        if (diffX > 40 && Math.abs(diffY) <= diffX * 0.5) {
+            // previous
+            playlistController.previous();
+            playCurrentTrack(audio, playlistController, playbackController);
+        }
+        else if (diffX < -40 && Math.abs(diffY) <= Math.abs(diffX) * 0.5) {
+            // next
+            playlistController.next();
+            playCurrentTrack(audio, playlistController, playbackController);
+        }
+        else if (diffY > 40 && Math.abs(diffX) <= diffY * 0.5) {
+            // loop
+            playlistController.toggleLoop();
+            const loopColor = document.querySelector(".now-playing");
+            if (playlistController.isLooping) {
+                loopColor.style.setProperty("--repeat-color", "#029e43");
+            }
+            else {
+                loopColor.style.setProperty("--repeat-color", "#a19e9e");
+            }
+        }
+        else if (diffY > -40 && Math.abs(diffX) <= Math.abs(diffY) * 0.5) {
+            // shuffle
+            playlistController.toggleShuffle();
+            const shuffleColor = document.querySelector(".bi-shuffle");
+            if (playlistController.isShuffling) {
+                shuffleColor.style.setProperty("--shuffle-color", "#029e43");
+            }
+            else {
+                shuffleColor.style.setProperty("--shuffle-color", "#a19e9e");
+            }
+        }
     }
 }
 
@@ -88,7 +127,7 @@ function displayTrackTitle(curIndex) {
 }
 
 // audioを繰り返し再生するためのギミック関数
-async function playCurrentTrack(audio, playlistController, playbackController) {
+function playCurrentTrack(audio, playlistController, playbackController) {
     displayTrackTitle(playlistController.curIndex);
     audio.src = playlist[playlistController.curIndex].url;
     playbackController.play(audio);
@@ -136,19 +175,22 @@ function playingManager() {
         rlud swipe -> touchstart and touchend
     */
     const interactionController = new InteractionController();
+
+    screen.addEventListener("click", () => {
+        interactionController.detectTap(playbackController, audio);
+    })
+
     let xCoordinate = 0;
-    let time = 0;
     screen.addEventListener("touchstart", (e) => {
         xCoordinate = e.touches[0].clientX;
-        yCoordinate = e.touches[0].clientY;
-        time = performance.now();
-        interactionController.logStart(xCoordinate, yCoordinate, time);
+        const yCoordinate = e.touches[0].clientY;
+        interactionController.logStart(xCoordinate, yCoordinate);
     })
 
     screen.addEventListener("touchend", async (e) => {
         xCoordinate = e.changedTouches[0].clientX;
-        time = performance.now();
-        interactionController.logEnd(xCoordinate, time);
+        const yCoordinate = e.changedTouches[0].clientY;
+        interactionController.logEnd(xCoordinate, yCoordinate);
         interactionController.detectGesture(playbackController, playlistController, audio);
     })
 }
