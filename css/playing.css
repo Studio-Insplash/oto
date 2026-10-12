@@ -23,13 +23,8 @@ tspan {
     --text-color: #a19e9e;
     --bar-color: #a19e9e;
     --status-color: #a19e9e;
-    --progress-bar-border-color: #a19e9e;
-    --progress-bar-status-color: #029e43;
-    --progress-bar-divider-color: #12100e;
-    --circle-character-color: #a19e9e;
     --repeat-color: #a19e9e;
     --shuffle-color: #a19e9e;
-    --progress: 0%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,4 +44,8 @@ tspan {
 
 .bi-repeat {
     fill: var(--repeat-color);
+}
+
+.bi-shuffle {
+    fill: var(--shuffle-color);
 }
