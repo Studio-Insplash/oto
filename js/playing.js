@@ -187,10 +187,10 @@ function playingManager() {
         interactionController.logStart(xCoordinate, yCoordinate);
     })
 
-    screen.addEventListener("touchend", async (e) => {
+    screen.addEventListener("touchend", (e) => {
         xCoordinate = e.changedTouches[0].clientX;
         const yCoordinate = e.changedTouches[0].clientY;
         interactionController.logEnd(xCoordinate, yCoordinate);
-        interactionController.detectSwipe(playbackController, playlistController, audio);
+        interactionController.detectSwipe(playlistController, playbackController, audio);
     })
 }
