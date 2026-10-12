@@ -96,7 +96,7 @@ class InteractionController {
             playlistController.next();
             playCurrentTrack(audio, playlistController, playbackController);
         }
-        else if (diffY > 40 && Math.abs(diffX) <= diffY * 0.5) {
+        else if (diffY < -40 && Math.abs(diffX) <= Math.abs(diffY) * 0.5) {
             // loop
             playlistController.toggleLoop();
             const loopColor = document.querySelector(".now-playing");
@@ -107,7 +107,7 @@ class InteractionController {
                 loopColor.style.setProperty("--repeat-color", "#a19e9e");
             }
         }
-        else if (diffY > -40 && Math.abs(diffX) <= Math.abs(diffY) * 0.5) {
+        else if (diffY > 40 && Math.abs(diffX) <= Math.abs(diffY) * 0.5) {
             // shuffle
             playlistController.toggleShuffle();
             const shuffleColor = document.querySelector(".bi-shuffle");
