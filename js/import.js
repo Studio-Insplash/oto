@@ -45,8 +45,19 @@ function playListConverter(files) {
             continue;
         }
         const playbackURL = URL.createObjectURL(file);
-        const extensionIndex = file.name.lastIndexOf(".");
-        const songTitle = file.name.slice(0, extensionIndex);
+        let extensionIndex = file.name.lastIndexOf(".");
+        let extensionCheck = file.name.slice(extensionIndex, extensionIndex + 4);
+        if (extensionIndex != -1 && (extensionCheck != ".wav" && extensionCheck != ".mp3")) {
+            extensionIndex = -1;
+        }
+        let songTitle;
+        if (extensionIndex === -1) {
+            songTitle = "You don't have an appropriate extension :("
+        }
+        else {
+            songTitle = file.name.slice(0, extensionIndex);
+        }
+        // 文字数の制限を加えるコード
         playlist.push({
             title: songTitle,
             url: playbackURL
