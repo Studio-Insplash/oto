@@ -1,4 +1,6 @@
 const MINIMUM_GENERATING_TIME = 5000;
+const MAX_TITLE_LENGTH = 30;
+const ERROR_TITLE = "You don't have an appropriate title format :(";
 
 const input = document.getElementById("fileInput");
 const curState = {
@@ -52,12 +54,15 @@ function playListConverter(files) {
         }
         let songTitle;
         if (extensionIndex === -1) {
-            songTitle = "You don't have an appropriate extension :("
+            songTitle = ERROR_TITLE;
         }
         else {
             songTitle = file.name.slice(0, extensionIndex);
         }
-        // 文字数の制限を加えるコード
+        
+        if (songTitle.length > MAX_TITLE_LENGTH) {
+            songTitle = ERROR_TITLE;
+        }
         playlist.push({
             title: songTitle,
             url: playbackURL
