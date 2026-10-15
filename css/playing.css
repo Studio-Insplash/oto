@@ -39,7 +39,7 @@ tspan {
 .playback-status {
     color: var(--status-color);
     display: flex;
-    gap: 20px;
+    gap: 40px;
 }
 
 .bi-repeat {
