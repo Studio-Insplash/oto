@@ -1,4 +1,4 @@
-const trackTitle = document.querySelector(".track-title");
+const trackTitle = document.querySelectorAll(".track-title > p");
 
 // Playback Controller
 class PlaybackController {
@@ -123,7 +123,9 @@ class InteractionController {
 
 // Display song title
 function displayTrackTitle(curIndex) {
-    trackTitle.textContent = playlist[curIndex].title;
+    trackTitle.forEach(p => {
+        p.textContent = playlist[curIndex].title;
+    });
 }
 
 // audioを繰り返し再生するためのギミック関数
