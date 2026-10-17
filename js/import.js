@@ -1,6 +1,6 @@
 const MINIMUM_GENERATING_TIME = 5000;
-const MAX_TITLE_LENGTH = 30;
 const ERROR_TITLE = "You don't have an appropriate format.";
+const MAX_TITLE_LENGTH = ERROR_TITLE.length;
 
 const input = document.getElementById("fileInput");
 const curState = {
