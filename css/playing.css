@@ -33,13 +33,21 @@ tspan {
     top: -100px;
 }
 
+.track-title {
+    animation: marquee 5s linear infinite;
+    display: flex;
+    column-gap: 2rem;
+}
+
 .track-title > p{
     color: var(--text-color);
     letter-spacing: 2px;
 }
 
 .track-title > p:nth-child(2) {
-    display: none
+    /* display: none; */
+    color: var(--text-color);
+    letter-spacing: 2px;
 }
 
 .playback-status {
@@ -54,4 +62,10 @@ tspan {
 
 .bi-shuffle {
     fill: var(--shuffle-color);
+}
+
+@keyframes marquee {
+    0% { transform: translateX(50%) }
+    50% { transform: translateX(-50%) }
+    100% { transform: translateX(50%) }
 }
