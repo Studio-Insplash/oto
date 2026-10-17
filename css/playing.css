@@ -36,6 +36,10 @@ tspan {
     letter-spacing: 2px;
 }
 
+.track-title > p:nth-child(2) {
+    display: none
+}
+
 .playback-status {
     color: var(--status-color);
     display: flex;
