@@ -1,4 +1,4 @@
-const trackTitle = document.querySelectorAll(".track-title > p");
+const trackTitle = document.querySelector(".track-title > p");
 
 // Playback Controller
 class PlaybackController {
@@ -81,6 +81,12 @@ class InteractionController {
 
     detectTap(playbackController, audio) {
         playbackController.togglePlayPause(audio);
+        if (audio.paused) {
+            trackTitle.style.animation = "none";
+        }
+        else {
+            trackTitle.style.animation = "marquee 10s linear infinite";
+        }
     }
 
     detectSwipe(playlistController, playbackController, audio) {
@@ -123,9 +129,7 @@ class InteractionController {
 
 // Display song title
 function displayTrackTitle(curIndex) {
-    trackTitle.forEach(p => {
-        p.textContent = playlist[curIndex].title;
-    });
+    trackTitle.textContent = playlist[curIndex].title;
 }
 
 // audioを繰り返し再生するためのギミック関数
@@ -144,6 +148,7 @@ function playingManager() {
     const audio = playbackController.generateAudio(playlistController.curIndex);
 
     // 最初の再生
+    trackTitle.style.animation = "marquee 10s linear infinite";
     playbackController.play(audio);
 
     // ここから曲の再生や停止をinteraction contorollerやイベントを使って連動させていく。
