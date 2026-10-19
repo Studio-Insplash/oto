@@ -1,5 +1,7 @@
 body.playing {
     --bg-color: #12100e;
+    --font-style: "Exo 2";
+    --font-style-jp: "New Tegomin";
     background-color: var(--bg-color);
 }
 
@@ -36,6 +38,8 @@ tspan {
 .track-title {
     display: flex;
     overflow: hidden;
+    font-style: italic;
+    font-family: var(--font-style), var(--font-style-jp), sans-serif;
 }
 
 .track-title > p{
