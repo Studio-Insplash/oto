@@ -170,6 +170,7 @@ function playingManager() {
         else {
             // 通常モードの挙動
             if ( playlistController.curIndex + 1 == playlist.length ) {
+                trackTitle.style.animation = "none";
                 return;
             }
             playlistController.next();
