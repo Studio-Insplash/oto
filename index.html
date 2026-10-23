@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Load json for Progressive Web App -->
     <link rel="manifest" href="manifest.json">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/import.css">
     <link rel="stylesheet" href="css/playing.css">
@@ -12,9 +16,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2&family=New+Tegomin&display=swap">
+    
+    <!-- Tab title -->
     <title>OTO</title>
 </head>
 <body>
+    <!-- The area for uploading your music files -->
     <section id="import">
         <div class="drop-area">
             <label class="upload-btn">
@@ -33,6 +40,8 @@
             </label>
         </div>
     </section>
+
+    <!-- The area for playing your music -->
     <section id="playing">
         <div class="now-playing">
             <h4 class="track-title">
@@ -50,6 +59,7 @@
         </div>
     </section>
 
+    <!-- Javascript -->
     <script src="js/import.js" defer></script>
     <script src="js/playing.js" defer></script>
     <script src="js/main.js" defer></script>

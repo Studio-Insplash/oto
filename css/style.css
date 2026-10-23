@@ -1,9 +1,11 @@
+/* Initial configuration */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Set up CSS variables */
 :root {
     --bg-color: #1a1714;
     --outline-border-color: #a94d00;
@@ -16,22 +18,26 @@
     --status-text-color: #e8e4de;
 }
 
+/* Screen Configuration */
 html,
 body {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: hidden; /* <- これなんだっけ？*/
 }
 
+/* Interaction Configuration */
 body {
     touch-action: none;
     user-select: none;
 }
 
+/* Initial Display */
 section {
     display: none;
 }
 
+/* Triggered by activated */
 section.active {
     display: flex;
 }
