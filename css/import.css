@@ -1,7 +1,9 @@
+/* Screen Configuration */
 body.import {
     background-color: var(--bg-color);
 }
 
+/* Layout Configuration */
 #import {
     flex-direction: column;
     align-items: center;
@@ -59,6 +61,7 @@ body.import {
     border-color: var(--button-outer-border-color);
 }
 
+/* The area for uploading your music */
 .drop-area {
     display: flex;
     align-items: center;
@@ -129,6 +132,7 @@ body.import {
     opacity: 0.8;
 }
 
+/* Animations */
 @keyframes rotate-loading {
     from {
         transform: rotate(0deg);
