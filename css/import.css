@@ -81,6 +81,7 @@ body.import {
 }
 
 .drop-area::before {
+    /* Outer animated circle */
     content: "";
     position: absolute;
     inset: -20px;
@@ -115,6 +116,7 @@ body.import {
 }
 
 .upload-btn::before {
+    /* Inner animated circle */
     content: "";
     position: absolute;
     width: 120px;
@@ -127,6 +129,7 @@ body.import {
     animation: rotate-loading 8s linear infinite;
 }
 
+/* これ必要か？ */
 .upload-btn:active {
     transform: scale(0.92);
     opacity: 0.8;
