@@ -129,7 +129,7 @@ body.import {
     animation: rotate-loading 8s linear infinite;
 }
 
-/* これ必要か？ */
+/* ボタン押下時に押してる感を演出 */
 .upload-btn:active {
     transform: scale(0.92);
     opacity: 0.8;
