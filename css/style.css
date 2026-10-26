@@ -1,9 +1,8 @@
-/* Initial configuration */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* 
+    このstyle.cssにはotoの基本の設定を書いている。
+    import.cssやplaying.cssでの状態に応じて
+    そちら側から書き換えられることもある。
+*/
 
 /* Set up CSS variables */
 :root {
@@ -16,6 +15,13 @@
     --button-svg-color: #ffffff;
     --button-outer-border-color: #e7dcdc;
     --status-text-color: #e8e4de;
+}
+
+/* Initial configuration */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* Screen Configuration */
