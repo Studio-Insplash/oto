@@ -1,10 +1,10 @@
 /* 
-    このstyle.cssにはotoの基本の設定を書いている。
-    import.cssやplaying.cssでの状態に応じて
-    そちら側から書き換えられることもある。
+    This file contains OTO's base styles.
+    Some properties may be overridden by import.css or playing.css
+    depending on the current state.
 */
 
-/* Set up CSS variables */
+/* Initial set up for CSS variables */
 :root {
     --bg-color: #1a1714;
     --outline-border-color: #a94d00;
@@ -29,7 +29,7 @@ html,
 body {
     width: 100%;
     height: 100%;
-    overflow: hidden; /* <- これなんだっけ？*/
+    overflow: hidden; /* Keep the application view fixed. The UI should fit within the viewport without scrolling. */
 }
 
 /* Interaction Configuration */
