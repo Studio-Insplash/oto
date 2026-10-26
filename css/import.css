@@ -13,6 +13,12 @@ body.import {
     gap: 50px;
 }
 
+/* 
+    JavaScript adds the "generating" or "ready" class to #import
+    depending on its current state.
+    No class is added in the initial idle state.
+*/
+
 /* IDLE STATE */
 #import .upload-btn {
     color: var(--button-svg-color);
@@ -39,7 +45,7 @@ body.import {
 }
 #import.generating .upload-btn::before {
     animation: rotate-loading 1s linear infinite;
-    --button-outer-border-color: #4d4f99; /* 6e04b6 */
+    --button-outer-border-color: #4d4f99;
 }
 
 /* READY STATE */
@@ -61,7 +67,7 @@ body.import {
     border-color: var(--button-outer-border-color);
 }
 
-/* The area for uploading your music */
+/* Music drop area */
 .drop-area {
     display: flex;
     align-items: center;
@@ -93,10 +99,12 @@ body.import {
     animation: rotate-loading 4s linear infinite;
 }
 
+/* File input for music uploads */
 #fileInput {
     text-align: center;
 }
 
+/* Upload button */
 .upload-btn {
     display: flex;
     align-items: center;
@@ -129,8 +137,8 @@ body.import {
     animation: rotate-loading 8s linear infinite;
 }
 
-/* ボタン押下時に押してる感を演出 */
 .upload-btn:active {
+    /* Provide visual feedback when the button is pressed. */
     transform: scale(0.92);
     opacity: 0.8;
 }
