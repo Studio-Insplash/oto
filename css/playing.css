@@ -13,9 +13,7 @@ body.playing {
     width: 100%;
 }
 
-text,
-.track-title,
-tspan {
+.track-title {
     user-select: none;
     touch-action: none;
     -webkit-user-select: none;
